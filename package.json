@@ -1,0 +1,28 @@
+{
+  "name": "SuperCanvas",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "firebase": "^5.5.3",
+    "mobx": "4.5.0",
+    "mobx-react": "^5.2.8",
+    "react": "16.5.0",
+    "react-native": "0.57.2",
+    "react-native-elements": "^0.19.1",
+    "react-native-vector-icons": "^6.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.0",
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.48.0",
+    "react-test-renderer": "16.5.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
