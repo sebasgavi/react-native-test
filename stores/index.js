@@ -1,23 +1,18 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 
 import { AuthStore } from './AuthStore';
+import { MensajesStore } from './MensajesStore';
 
-import { MessagesStore } from './MessagesStore'
-
-const config = {
-    apiKey: "AIzaSyD3CdvAdWyQ-PocI5Dzxg5jeosLxv3uuxM",
-    authDomain: "supercanvas-db1b5.firebaseapp.com",
-    databaseURL: "https://supercanvas-db1b5.firebaseio.com",
-    projectId: "supercanvas-db1b5",
-    storageBucket: "supercanvas-db1b5.appspot.com",
-    messagingSenderId: "837112694624"
-};
-
-if(!firebase.apps.length) {
-    firebase.initializeApp(config);
-}
+if(!firebase.apps.length) firebase.initializeApp({
+  apiKey: "AIzaSyDpWz2i2PVoN0WedM1hzumnd5_P3Kmdk4c",
+  authDomain: "web-adv-test.firebaseapp.com",
+  databaseURL: "https://web-adv-test.firebaseio.com",
+  projectId: "web-adv-test",
+  storageBucket: "web-adv-test.appspot.com",
+  messagingSenderId: "637314218364"
+});
 
 export const stores = {
-    auth: new AuthStore(firebase),
-    messages: new MessagesStore(firebase)
+  auth: new AuthStore(firebase),
+  mensajes: new MensajesStore(firebase),
 };

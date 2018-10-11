@@ -1,43 +1,51 @@
-import React, {Component} from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { FormInput, FormLabel, Button } from 'react-native-elements';
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
+import { FormInput, FormLabel, Button } from 'react-native-elements';
 
-import { stores } from '../stores/index';
+import { stores } from '../stores';
 
-@observer export class Main extends Component<{}, {}> {
+@observer export class Main extends React.Component{
 
-    @observable message = 'hi';
+  @observable mensaje = '';
 
-    constructor (props) {
-        super(props);
-    }
+  constructor(props){
+    super(props);
+    this.onEnviar = this.onEnviar.bind(this);
+  }
 
-    onEnviar = () => {
-        stores.messages.enviarMensaje(this.message, stores.auth.user);
-    };
+  onEnviar(){
+    stores.mensajes.enviarMensaje(this.mensaje, stores.auth.user);
+  }
 
-    render() {
-        return <View style={styles.container}>
+  render(){
+    return <View style={styles.container}>
+      <Text>Main</Text>
 
-            <Text>Main</Text>
-            <FormLabel>Mensaje</FormLabel>
-            <FormInput value={this.message} onChangeText={v => this.message = v} placeholder='una wea'/>
-            <Button buttonStyle={styles.button} title='Un buton' large onPress={this.onEnviar}/>
+      <FormLabel>Mensaje</FormLabel>
+      <FormInput
+        onChangeText={v => (this.mensaje = v)}
+        value={this.mensaje}
+        placeholder="el mensaje"
+      />
 
-        </View>;
-    }
-
+      <Button
+        buttonStyle={styles.button}
+        title="Enviar"
+        large
+        onPress={this.onEnviar}
+      />
+    </View>
+  }
 }
 
-
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 20
-    },
-    button: {
-        backgroundColor: 'red',
-        marginTop: 20
-    }
+  container: {
+    marginTop: 30,
+  },
+  button: {
+    backgroundColor: 'violet',
+    marginTop: 20,
+  },
 });

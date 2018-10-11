@@ -1,52 +1,68 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { View, StyleSheet, ToastAndroid, Text } from 'react-native';
 import { FormInput, FormLabel, Button } from 'react-native-elements';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react';
 
-import { stores } from '../stores/index'
+import { stores } from '../stores';
 
-@observer export class Login extends Component {
+@observer
+export class Login extends React.Component {
+  @observable
+  credenciales = {
+    correo: 'test@gmail.com',
+    contra: '123456',
+  };
 
-    @observable credenciales = {
-        correo: 'elcorrein@hotmail.com',
-        contra: 'superCorreo'
-    };
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-    }
+  onSubmit() {
+    ToastAndroid.show('iniciando...', ToastAndroid.SHORT);
+    stores.auth.iniciarSesion(this.credenciales.correo, this.credenciales.contra);
+  }
 
+  render() {
+    return (
+      <View style={styles.container}>
+        <FormLabel>Correo</FormLabel>
+        <FormInput
+          onChangeText={v => (this.credenciales.correo = v)}
+          value={this.credenciales.correo}
+          placeholder="tu correo electrónico"
+        />
 
-    onSubmit = () => {
-        ToastAndroid.show(this.credenciales.correo + ' ' + this.credenciales.contra, ToastAndroid.SHORT);
-        stores.auth.loginFire(this.credenciales.correo, this.credenciales.contra);
-    };
+        <FormLabel>Contraseña</FormLabel>
+        <FormInput
+          onChangeText={v => (this.credenciales.contra = v)}
+          value={this.credenciales.contra}
+          placeholder="•••••••"
+          secureTextEntry
+        />
 
+        <Button
+          buttonStyle={styles.button}
+          title="Iniciar Sesion"
+          large
+          onPress={this.onSubmit}
+        />
 
-    render () {
-        return <View style={styles.container}>
-            <FormLabel>correo</FormLabel>
-            <FormInput value={this.credenciales.correo} onChangeText={v => this.credenciales.correo = v} placeholder='Tu correo wey'/>
-            <FormLabel>Contraseña</FormLabel>
-            <FormInput value={this.credenciales.contra} placeholder='******' onChangeText={v => this.credenciales.contra = v} secureTextEntry/>
-            <Button buttonStyle={styles.button} title='Iniciar Sesión' large onPress={this.onSubmit}/>
+        <Text>{stores.auth.user ? stores.auth.user.uid : 'No has iniciado sesión.'}</Text>
 
-            <Text>{stores.auth.user ? stores.auth.user.uid: 'no has iniciado sesion.'}</Text>
-            <Text>{stores.auth.errorCode ? stores.auth.errorMessage: ''}</Text>
-        </View>;
-    }
-
+        {stores.auth.error && <Text>{stores.auth.error}</Text>}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 20
-    },
-    button: {
-        backgroundColor: 'red',
-        marginTop: 20
-    }
-
-
+  container: {
+    marginTop: 30,
+  },
+  button: {
+    backgroundColor: 'violet',
+    marginTop: 20,
+  },
 });

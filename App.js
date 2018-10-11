@@ -9,8 +9,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import {observer} from "mobx-react";
 
-import { Login } from './Containers/Login';
-import { Main } from './Containers/Main';
+import { Login } from './containers/Login';
+import { Main } from './containers/Main';
 import { stores } from './stores/index';
 
 global.Symbol = require('core-js/es6/symbol');
