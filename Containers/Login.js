@@ -6,10 +6,8 @@ import { observer } from 'mobx-react';
 
 import { stores } from '../stores';
 
-@observer
-export class Login extends React.Component {
-  @observable
-  credenciales = {
+@observer export class Login extends React.Component {
+  @observable credenciales = {
     correo: 'test@gmail.com',
     contra: '123456',
   };
