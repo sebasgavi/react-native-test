@@ -1,4 +1,4 @@
-package com.supercanvas;
+package com.react_angular;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "SuperCanvas";
+        return "React_Angular";
     }
 }
